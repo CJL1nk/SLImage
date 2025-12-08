@@ -5,8 +5,7 @@
 #ifndef WRITE_H
 #define WRITE_H
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "includes.h"
 
 int write(const char* fileName, int xSize, int ySize, const char* writeBytes[]);
 

@@ -11,14 +11,13 @@
  */
 SLImage* readImage(const char* fileName) {
 
-    SLImage* image;
-    image = (SLImage*)malloc(sizeof(SLImage));
-
     // Bytes for file header
-    unsigned char headerBytes[4] = {0xFF, 0xA5, 0xFF, 0xE8};
+    const unsigned char headerBytes[4] = {0xFF, 0xA5, 0xFF, 0xE8};
 
+    SLImage *image = (SLImage *) malloc(sizeof(SLImage));
     unsigned char dataBuffer[4];
     int32_t value;
+
     FILE* f = fopen(fileName, "rb");
 
     // Read 4 bytes from offset 0, ensure the header is FF A5 FF E8
@@ -54,6 +53,5 @@ SLImage* readImage(const char* fileName) {
     image->ySize = value;
 
     fclose(f);
-
     return image;
 }

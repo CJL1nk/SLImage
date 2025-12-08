@@ -2,11 +2,10 @@
 // Created by CJ on 12/7/25.
 //
 
-#include <stdio.h>
-
+#include "includes.h"
 #include "write.h"
+#include "display.h"
 #include "read.h"
-#include "types.h"
 
 int main(const int argc, char* argv[]) {
 
@@ -18,14 +17,15 @@ int main(const int argc, char* argv[]) {
     const char mode = argv[1][0];
     const char* fileName = argv[2];
 
-    if (fileName == NULL) {
+    // Should never happen
+    if (fileName == NULL || fileName == "") {
         fileName = "image.slmg";
     }
 
     switch (mode) {
         case 'w': {
             const char* writeBytes[] = {};
-            write(fileName, 2048, 512, writeBytes);
+            write(fileName, 128, 128, writeBytes);
             break;
         }
 
@@ -35,6 +35,27 @@ int main(const int argc, char* argv[]) {
             printf("xSize: %d\n", image->xSize);
             printf("ySize: %d\n", image->ySize);
 
+            Display* display = createWindow(image->xSize, image->ySize);
+
+            XEvent event;
+            while (1) {
+                XNextEvent(display, &event);
+                switch (event.type) {
+                    case Expose:
+                        printf("Expose\n");
+                        break;
+                    case KeyPress:
+                        printf("KeyPress\n");
+                        break;
+                    case ButtonPress:
+                        printf("MousePress\n");
+                        break;
+                }
+            }
+
+            // Goodbye memory
+            XCloseDisplay(display);
+            free(display);
             free(image);
             break;
         }

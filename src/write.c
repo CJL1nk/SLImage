@@ -10,10 +10,10 @@
  */
 int write(const char* fileName, int32_t xSize, int32_t ySize, const char* writeBytes[]) {
 
-    FILE* f = fopen(fileName, "wb+");
-
     // Bytes for file header
-    unsigned char headerBytes[4] = {0xFF, 0xA5, 0xFF, 0xE8};
+    const unsigned char headerBytes[4] = {0xFF, 0xA5, 0xFF, 0xE8};
+
+    FILE* f = fopen(fileName, "wb+");
 
     // Write header bytes
     fwrite(&headerBytes, sizeof(unsigned char), sizeof(headerBytes) / sizeof(unsigned char), f);

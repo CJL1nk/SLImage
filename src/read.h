@@ -5,8 +5,7 @@
 #ifndef READ_H
 #define READ_H
 
-#include "types.h"
-#include <stdio.h>
+#include "includes.h"
 
 SLImage* readImage(const char* fileName);
 
