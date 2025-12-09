@@ -31,8 +31,6 @@ int main(const int argc, char* argv[]) {
             const uint32_t* testData = generateTestData(xSize, ySize);
             write(fileName, xSize, ySize, testData);
 
-            // Super ultra memory leak
-            free(testData);
             break;
         }
 
@@ -45,7 +43,7 @@ int main(const int argc, char* argv[]) {
             viewImage(image);
 
             // Super ultra mega ultron memory leak
-            free(image);
+            free(image->data);
             break;
         }
 

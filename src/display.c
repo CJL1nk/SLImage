@@ -4,10 +4,6 @@
 
 #include "display.h"
 
-/**
- * Creates and opens X11 display
- * @return Pointer to created display object
- */
 Display* createDisplay() {
 
     Display* display;
@@ -21,13 +17,7 @@ Display* createDisplay() {
     return display;
 }
 
-/**
- * Creates and maps window from given display
- * @param display Display to create window for
- * @param xSize Window width
- * @param ySize Window height
- * @return Pointer to created window object
- */
+
 Window createWindow(Display* display, int xSize, int ySize) {
 
     int screen_num = DefaultScreen(display);
@@ -60,11 +50,7 @@ Window createWindow(Display* display, int xSize, int ySize) {
     return window;
 }
 
-/**
- * Creates a simple window to view an image.
- * @param image Image to view
- * @return 0 if successful, 1 otherwise
- */
+
 int viewImage(const SLImage* slimage) {
 
     XEvent event;
@@ -80,7 +66,7 @@ int viewImage(const SLImage* slimage) {
     uint32_t* buffer = (uint32_t *)malloc(slimage->xSize * slimage->ySize * sizeof(uint32_t));
 
     // Image to render within X11 window
-    XImage *image = XCreateImage(display, DefaultVisual(display, screen), DefaultDepth(display, screen), ZPixmap, 0, (char *)buffer, slimage->xSize, slimage->ySize, 32, 0);
+    XImage *ximage = XCreateImage(display, DefaultVisual(display, screen), DefaultDepth(display, screen), ZPixmap, 0, (char *)buffer, slimage->xSize, slimage->ySize, 32, 0);
 
     // Loop through every pixel and load into X11 image buffer
     for (int y = 0; y < slimage->ySize; y++) {
@@ -97,9 +83,8 @@ int viewImage(const SLImage* slimage) {
         switch (event.type) {
 
             case Expose: {
-
                 // Display image on window
-                XPutImage(display, window, gc, image, 0, 0, 0, 0, slimage->xSize, slimage->ySize);
+                XPutImage(display, window, gc, ximage, 0, 0, 0, 0, slimage->xSize, slimage->ySize);
                 XFlush(display);
                 break;
             }
@@ -114,6 +99,5 @@ int viewImage(const SLImage* slimage) {
         }
     }
 
-    free(buffer);
     return 0;
 }

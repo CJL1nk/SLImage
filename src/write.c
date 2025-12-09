@@ -5,14 +5,6 @@
 #include "write.h"
 #include "types.h"
 
-/**
- * Writes image data to file
- * @param fileName Name of file to write
- * @param xSize Image width
- * @param ySize Image height
- * @param data Image datastream
- * @return 0 if successful, 1 otherwise
- */
 int write(const char* fileName, const uint32_t xSize, const uint32_t ySize, const uint32_t* data) {
 
     // Bytes for file header
@@ -39,12 +31,7 @@ int write(const char* fileName, const uint32_t xSize, const uint32_t ySize, cons
     return 0;
 }
 
-/**
- * Generates a gradient to fill an image with
- * @param xSize Image width
- * @param ySize Images height
- * @return Pointer to image data
- */
+
 uint32_t* generateTestData(const uint32_t xSize, const uint32_t ySize) {
 
     uint32_t* data = (uint32_t *)malloc(xSize * ySize * sizeof(uint32_t));

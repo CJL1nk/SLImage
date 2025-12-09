@@ -4,11 +4,6 @@
 
 #include "read.h"
 
-/**
- * Reads and creates an image object from given filename
- * @param fileName Path to image to read
- * @return Pointer to created image object
- */
 SLImage* readImage(const char* fileName) {
 
     // Bytes for file header
