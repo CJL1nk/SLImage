@@ -5,16 +5,16 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-#include <stdlib.h>
-
 typedef struct SLImage {
 
     char* fileName;
 
-    int32_t xSize;
-    int32_t ySize;
+    uint32_t xSize;
+    uint32_t ySize;
 
-    const char* imageData[];
+    uint32_t size;
+    uint32_t* data;
+
 } SLImage;
 
 #endif //TYPES_H

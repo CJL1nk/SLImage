@@ -7,6 +7,8 @@
 
 #include "includes.h"
 
-Display* createWindow(int xSize, int ySize);
+Display* createDisplay();
+Window createWindow(Display* display, int xSize, int ySize);
+int viewImage(const SLImage* image);
 
 #endif //DISPLAY_H

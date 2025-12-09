@@ -9,8 +9,8 @@
 
 int main(const int argc, char* argv[]) {
 
-    if (argc != 3) {
-        printf("Usage: ./SLImage <mode> <filename>\n");
+    if (argc < 3) {
+        printf("Usage: ./SLImage <mode> <filename> <width> <height>\n");
         return 1;
     }
 
@@ -24,8 +24,15 @@ int main(const int argc, char* argv[]) {
 
     switch (mode) {
         case 'w': {
-            const char* writeBytes[] = {};
-            write(fileName, 128, 128, writeBytes);
+
+            const int xSize = atoi(argv[3]);
+            const int ySize = atoi(argv[4]);
+
+            const uint32_t* testData = generateTestData(xSize, ySize);
+            write(fileName, xSize, ySize, testData);
+
+            // Super ultra memory leak
+            free(testData);
             break;
         }
 
@@ -35,27 +42,9 @@ int main(const int argc, char* argv[]) {
             printf("xSize: %d\n", image->xSize);
             printf("ySize: %d\n", image->ySize);
 
-            Display* display = createWindow(image->xSize, image->ySize);
+            viewImage(image);
 
-            XEvent event;
-            while (1) {
-                XNextEvent(display, &event);
-                switch (event.type) {
-                    case Expose:
-                        printf("Expose\n");
-                        break;
-                    case KeyPress:
-                        printf("KeyPress\n");
-                        break;
-                    case ButtonPress:
-                        printf("MousePress\n");
-                        break;
-                }
-            }
-
-            // Goodbye memory
-            XCloseDisplay(display);
-            free(display);
+            // Super ultra mega ultron memory leak
             free(image);
             break;
         }

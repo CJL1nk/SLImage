@@ -4,19 +4,19 @@
 
 #include "read.h"
 
-/*
- * Reads an image from a given file name and returns an image object containing the image data
- * Returns an empty image if given image was not a valid image format (Header should begin with FF A5 FF E8)
- * fileName: Directory of file to read
+/**
+ * Reads and creates an image object from given filename
+ * @param fileName Path to image to read
+ * @return Pointer to created image object
  */
 SLImage* readImage(const char* fileName) {
 
     // Bytes for file header
     const unsigned char headerBytes[4] = {0xFF, 0xA5, 0xFF, 0xE8};
 
-    SLImage *image = (SLImage *) malloc(sizeof(SLImage));
+    SLImage *image = (SLImage*) malloc(sizeof(SLImage));
     unsigned char dataBuffer[4];
-    int32_t value;
+    uint32_t value;
 
     FILE* f = fopen(fileName, "rb");
 
@@ -27,10 +27,7 @@ SLImage* readImage(const char* fileName) {
         if (dataBuffer[i] != headerBytes[i]) {
           printf("Not a valid SLImage\n");
 
-          image->xSize = 0;
-          image->ySize = 0;
-
-          return image;
+          exit(2);
         }
     }
 
@@ -51,6 +48,23 @@ SLImage* readImage(const char* fileName) {
                       (unsigned char)dataBuffer[3] << 24);
 
     image->ySize = value;
+
+    // Allocate space for pixel datastream
+    image->data = (uint32_t *)malloc(image->xSize * image->ySize * sizeof(uint32_t));
+
+    // Loop through every pixel in the image's pixel datastream and load to memory
+    for (int y = 0; y < image->ySize; y++) {
+        for (int x = 0; x < image->xSize; x++) {
+
+            fread(dataBuffer, 1, 4, f);
+
+            value = (uint32_t)((unsigned char)dataBuffer[0] |
+                               (unsigned char)dataBuffer[1] << 8 |
+                               (unsigned char)dataBuffer[2] << 16 |
+                               (unsigned char)dataBuffer[3] << 24);
+            image->data[y * image->xSize + x] = value;
+        }
+    }
 
     fclose(f);
     return image;

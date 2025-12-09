@@ -7,6 +7,7 @@
 
 #include "includes.h"
 
-int write(const char* fileName, int xSize, int ySize, const char* writeBytes[]);
+int write(const char* fileName, uint32_t xSize, uint32_t ySize, const uint32_t* data);
+uint32_t* generateTestData(uint32_t xSize, uint32_t ySize);
 
 #endif //WRITE_H
