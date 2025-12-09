@@ -20,8 +20,8 @@ int write(const char* fileName, uint32_t xSize, uint32_t ySize, const uint32_t* 
 /**
  * Generates a gradient to fill an image with
  * @param xSize Image width
- * @param ySize Images height
- * @return Pointer to image data
+ * @param ySize Image height
+ * @return Pointer to generated image data
  */
 uint32_t* generateTestData(uint32_t xSize, uint32_t ySize);
 

@@ -24,9 +24,9 @@ Window createWindow(Display* display, int xSize, int ySize);
 
 /**
  * Creates a simple window to view an image.
- * @param image Image to view
+ * @param slimage SLImage to view
  * @return 0 if successful, 1 otherwise
  */
-int viewImage(const SLImage* image);
+int viewImage(const SLImage* slimage);
 
 #endif //DISPLAY_H

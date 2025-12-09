@@ -57,16 +57,26 @@ int viewImage(const SLImage* slimage) {
     char exit = 0;
 
     Display* display = createDisplay();
-    Window window = createWindow(display, slimage->xSize, slimage->ySize);
-    GC gc = XCreateGC(display, window, 0, 0);
+    const Window window = createWindow(display, slimage->xSize, slimage->ySize);
+    const GC gc = XCreateGC(display, window, 0, 0);
 
-    int screen = DefaultScreen(display);
+    const int screen = DefaultScreen(display);
 
-    // Buffer that holds pixel data
-    uint32_t* buffer = (uint32_t *)malloc(slimage->xSize * slimage->ySize * sizeof(uint32_t));
+    // Buffer that holds slimage pixel data
+    uint32_t* buffer = (uint32_t*)malloc(slimage->xSize * slimage->ySize * sizeof(uint32_t));
+
+    if (!buffer) {
+        printf("Failed to allocate buffer.\n");
+        return 1;
+    }
 
     // Image to render within X11 window
     XImage *ximage = XCreateImage(display, DefaultVisual(display, screen), DefaultDepth(display, screen), ZPixmap, 0, (char *)buffer, slimage->xSize, slimage->ySize, 32, 0);
+
+    if (!ximage) {
+        printf("Failed to create XImage.\n");
+        return 1;
+    }
 
     // Loop through every pixel and load into X11 image buffer
     for (int y = 0; y < slimage->ySize; y++) {
@@ -96,8 +106,13 @@ int viewImage(const SLImage* slimage) {
                 printf("MousePress\n");
                 break;
             }
+            default: {
+                printf("The hell just happened");
+            };
         }
     }
+
+    free(buffer);
 
     return 0;
 }

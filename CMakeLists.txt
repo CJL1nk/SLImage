@@ -12,4 +12,4 @@ add_executable(SLImage
         src/read.c
         src/display.c)
 
-target_link_libraries(SLImage ${X11_LIBRARIES})
+target_link_libraries(SLImage ${X11_LIBRARIES} m)

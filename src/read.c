@@ -9,7 +9,7 @@ SLImage* readImage(const char* fileName) {
     // Bytes for file header
     const unsigned char headerBytes[4] = {0xFF, 0xA5, 0xFF, 0xE8};
 
-    SLImage *image = (SLImage*) malloc(sizeof(SLImage));
+    SLImage *image = malloc(sizeof(SLImage));
     unsigned char dataBuffer[4];
     uint32_t value;
 
@@ -26,9 +26,12 @@ SLImage* readImage(const char* fileName) {
         }
     }
 
+    // Various redundant casts are made here but only for documentation purposes
+    // 4 unsigned chars are joined together to make a single uint32
+
     // Read 4 bytes from offset 4, the offset where xSize is stored (int32)
     fread(dataBuffer, 1, 4, f);
-    value = (int32_t)((unsigned char)dataBuffer[0] |
+    value = (uint32_t)((unsigned char)dataBuffer[0] |
                       (unsigned char)dataBuffer[1] << 8 |
                       (unsigned char)dataBuffer[2] << 16 |
                       (unsigned char)dataBuffer[3] << 24);
@@ -37,15 +40,15 @@ SLImage* readImage(const char* fileName) {
 
     // Read 4 bytes from offset 8, the offset where ySize is stored (int32)
     fread(dataBuffer, 1, 4, f);
-    value = (int32_t)((unsigned char)dataBuffer[0] |
-                      (unsigned char)dataBuffer[1] << 8 |
-                      (unsigned char)dataBuffer[2] << 16 |
-                      (unsigned char)dataBuffer[3] << 24);
+    value = (uint32_t)((unsigned char)dataBuffer[0] |
+                       (unsigned char)dataBuffer[1] << 8 |
+                       (unsigned char)dataBuffer[2] << 16 |
+                       (unsigned char)dataBuffer[3] << 24);
 
     image->ySize = value;
 
     // Allocate space for pixel datastream
-    image->data = (uint32_t *)malloc(image->xSize * image->ySize * sizeof(uint32_t));
+    image->data = (uint32_t*)malloc(image->xSize * image->ySize * sizeof(uint32_t));
 
     // Loop through every pixel in the image's pixel datastream and load to memory
     for (int y = 0; y < image->ySize; y++) {

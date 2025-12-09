@@ -35,7 +35,7 @@ int main(const int argc, char* argv[]) {
         }
 
         case 'r': {
-            SLImage* image = readImage(fileName);
+            const SLImage* image = readImage(fileName);
 
             printf("xSize: %d\n", image->xSize);
             printf("ySize: %d\n", image->ySize);
