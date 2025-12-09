@@ -27,6 +27,7 @@ int write(const char* fileName, const uint32_t xSize, const uint32_t ySize, cons
     fwrite(&xSize, sizeof(int32_t), 1, f);
     fwrite(&ySize, sizeof(int32_t), 1, f);
 
+    // Write pixel datastream to file
     for (int y = 0; y < ySize; y++) {
         for (int x = 0; x < xSize; x++) {
             fwrite(&data[y * xSize + x], sizeof(int32_t), 1, f);
