@@ -112,7 +112,9 @@ int viewImage(const SLImage* slimage) {
         }
     }
 
-    free(buffer);
+    // Also frees allocated buffer
+    XDestroyImage(ximage);
+    XDestroyWindow(display, window);
 
     return 0;
 }

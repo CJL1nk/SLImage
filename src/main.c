@@ -31,6 +31,8 @@ int main(const int argc, char* argv[]) {
             const uint32_t* testData = generateTestData(xSize, ySize);
             write(fileName, xSize, ySize, testData);
 
+            free(testData);
+
             break;
         }
 
