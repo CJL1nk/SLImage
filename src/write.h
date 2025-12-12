@@ -25,4 +25,8 @@ int write(const char* fileName, uint32_t xSize, uint32_t ySize, const uint32_t* 
  */
 uint32_t* generateTestData(uint32_t xSize, uint32_t ySize);
 
+uint32_t* whiteImage(uint32_t xSize, uint32_t ySize);
+
+SLImage* createEmptyImage(uint32_t xSize, uint32_t ySize);
+
 #endif //WRITE_H

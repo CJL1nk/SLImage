@@ -38,10 +38,37 @@ uint32_t* generateTestData(const uint32_t xSize, const uint32_t ySize) {
     for (int y = 0; y < ySize; y++) {
         for (int x = 0; x < xSize; x++) {
 
-            const uint32_t pixelVal = (y * 255 / ySize) | ((x * 255 / (uint32_t)log(xSize)) << 16);
+            const uint32_t pixelVal = ((uint32_t)tan(y) * 255 / ySize) | ((uint32_t)(tan(x) * 255 / (uint32_t)log(xSize)) << 19);
             data[y * xSize + x] = pixelVal;
         }
     }
 
     return data;
+}
+
+uint32_t* whiteImage(const uint32_t xSize, const uint32_t ySize) {
+
+    uint32_t* data = malloc(xSize * ySize * sizeof(uint32_t));
+
+    for (int y = 0; y < ySize; y++) {
+        for (int x = 0; x < xSize; x++) {
+            data[y * xSize + x] = 0xFFFFFFFF;
+        }
+    }
+
+    return data;
+}
+
+SLImage* createEmptyImage(uint32_t xSize, uint32_t ySize) {
+
+    SLImage* image = malloc(sizeof(SLImage));
+
+    image->fileName = "unnamed.slmg";
+
+    image->xSize = xSize;
+    image->ySize = ySize;
+
+    image->data = whiteImage(xSize, ySize);
+
+    return image;
 }

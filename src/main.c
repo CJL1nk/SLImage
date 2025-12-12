@@ -6,6 +6,7 @@
 #include "write.h"
 #include "display.h"
 #include "read.h"
+#include "editor.h"
 
 int main(const int argc, char* argv[]) {
 
@@ -48,6 +49,11 @@ int main(const int argc, char* argv[]) {
             free(image->data);
             break;
         }
+
+    case 'e': {
+
+            createDefaultEditorWindow(512, 512);
+    }
 
         default: {
             printf("Valid modes: w (Write), r (Read)\n");
