@@ -67,7 +67,19 @@ int createEditorWindow(const SLImage* slimage) {
                 break;
         }
         case ButtonPress: {
-                printf("MousePress\n");
+
+                int xpos = event.xbutton.x;
+                int ypos = event.xbutton.y;
+
+                buffer[ypos * slimage->xSize + xpos] = 0x00000000;
+                buffer[ypos * slimage->xSize + (xpos + 1)] = 0x00000000;
+                buffer[ypos * slimage->xSize + (xpos - 1)] = 0x00000000;
+                buffer[(ypos + 1) * slimage->xSize + xpos] = 0x00000000;
+                buffer[(ypos - 1) * slimage->xSize + xpos] = 0x00000000;
+
+                XPutImage(display, window, gc, ximage, 0, 0, 0, 0, slimage->xSize, slimage->ySize);
+                XFlush(display);
+
                 break;
         }
         default: {
