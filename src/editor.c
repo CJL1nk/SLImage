@@ -21,6 +21,8 @@ int createEditorWindow(const SLImage* slimage) {
     XEvent event;
     char exit = 0;
 
+    uint32_t color = 0xFFFF0000;
+
     Display* display = createDisplay();
     const Window window = createWindow(display, slimage->xSize, slimage->ySize);
     const GC gc = XCreateGC(display, window, 0, 0);
@@ -63,7 +65,24 @@ int createEditorWindow(const SLImage* slimage) {
                 break;
         }
         case KeyPress: {
-                exit = 1;
+                switch (event.xkey.keycode) {
+
+                    case 30: {
+                            color += 0x00110000;
+                            break;
+                    }
+                    case 44: {
+                            color -= 0x00110000;
+                            break;
+                    }
+
+                    default: {
+                            exit = 1;
+                    }
+                }
+
+          printf("%d", event.xkey.keycode);
+
                 break;
         }
         case ButtonPress: {
@@ -71,11 +90,11 @@ int createEditorWindow(const SLImage* slimage) {
                 int xpos = event.xbutton.x;
                 int ypos = event.xbutton.y;
 
-                buffer[ypos * slimage->xSize + xpos] = 0x00000000;
-                buffer[ypos * slimage->xSize + (xpos + 1)] = 0x00000000;
-                buffer[ypos * slimage->xSize + (xpos - 1)] = 0x00000000;
-                buffer[(ypos + 1) * slimage->xSize + xpos] = 0x00000000;
-                buffer[(ypos - 1) * slimage->xSize + xpos] = 0x00000000;
+                buffer[ypos * slimage->xSize + xpos] = color;
+                buffer[ypos * slimage->xSize + (xpos + 1)] = color;
+                buffer[ypos * slimage->xSize + (xpos - 1)] = color;
+                buffer[(ypos + 1) * slimage->xSize + xpos] = color;
+                buffer[(ypos - 1) * slimage->xSize + xpos] = color;
 
                 XPutImage(display, window, gc, ximage, 0, 0, 0, 0, slimage->xSize, slimage->ySize);
                 XFlush(display);
