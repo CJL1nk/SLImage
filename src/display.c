@@ -62,27 +62,12 @@ int viewImage(const SLImage* slimage) {
 
     const int screen = DefaultScreen(display);
 
-    // Buffer that holds slimage pixel data
-    uint32_t* buffer = (uint32_t*)malloc(slimage->xSize * slimage->ySize * sizeof(uint32_t));
-
-    if (!buffer) {
-        printf("Failed to allocate buffer.\n");
-        return 1;
-    }
-
     // Image to render within X11 window
-    XImage *ximage = XCreateImage(display, DefaultVisual(display, screen), DefaultDepth(display, screen), ZPixmap, 0, (char *)buffer, slimage->xSize, slimage->ySize, 32, 0);
+    XImage *ximage = XCreateImage(display, DefaultVisual(display, screen), DefaultDepth(display, screen), ZPixmap, 0, (char *)slimage->data, slimage->xSize, slimage->ySize, 32, 0);
 
     if (!ximage) {
         printf("Failed to create XImage.\n");
         return 1;
-    }
-
-    // Loop through every pixel and load into X11 image buffer
-    for (int y = 0; y < slimage->ySize; y++) {
-        for (int x = 0; x < slimage->xSize; x++) {
-            buffer[y * slimage->xSize + x] = slimage->data[y * slimage->xSize + x];
-        }
     }
 
     // Continuously loop until exit is called

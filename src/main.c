@@ -45,8 +45,6 @@ int main(const int argc, char* argv[]) {
 
             viewImage(image);
 
-            // Super ultra mega ultron memory leak
-            free(image->data);
             break;
         }
 

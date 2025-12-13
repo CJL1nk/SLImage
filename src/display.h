@@ -24,6 +24,7 @@ Window createWindow(Display* display, int xSize, int ySize);
 
 /**
  * Creates a simple window to view an image.
+ * Frees slimage->data upon exit
  * @param slimage SLImage to view
  * @return 0 if successful, 1 otherwise
  */
