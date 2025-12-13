@@ -3,7 +3,6 @@
 //
 
 #include "editor.h"
-
 #include "write.h"
 
 int createDefaultEditorWindow(int xSize, int ySize) {
@@ -22,6 +21,7 @@ int createEditorWindow(const SLImage* slimage) {
     char exit = 0;
 
     uint32_t color = 0xFFFF0000;
+    int circleRadius = 20;
 
     Display* display = createDisplay();
     const Window window = createWindow(display, slimage->xSize, slimage->ySize);
@@ -53,57 +53,77 @@ int createEditorWindow(const SLImage* slimage) {
     }
 
     while (!exit)
-    {
+    {printf("%X", color);
         XNextEvent(display, &event);
 
         switch (event.type) {
-
-        case Expose: {
+            case Expose: {
                 // Display image on window
                 XPutImage(display, window, gc, ximage, 0, 0, 0, 0, slimage->xSize, slimage->ySize);
                 XFlush(display);
                 break;
-        }
-        case KeyPress: {
+            }
+            case KeyPress: {
                 switch (event.xkey.keycode) {
 
-                    case 30: {
-                            color += 0x00110000;
+                    case 79: { // Numpad 7
+                            color += 0x00050000;
                             break;
                     }
-                    case 44: {
-                            color -= 0x00110000;
+                    case 83: { // Numpad 4
+                            color -= 0x00050000;
                             break;
+                    }
+
+                    case 80: { // Numpad 8
+                          color += 0x00000500;
+                          break;
+                    }
+                    case 84: { // Numpad 5
+                          color -= 0x00000500;
+                          break;
+                    }
+
+                    case 81: { // Numpad 9
+                          color += 0x00000005;
+                          break;
+                    }
+                    case 85: { // Numpad 6
+                          color -= 0x00000005;
+                          break;
                     }
 
                     default: {
                             exit = 1;
+                            break;
                     }
                 }
 
-          printf("%d", event.xkey.keycode);
-
+                printf("%X", color);
                 break;
-        }
-        case ButtonPress: {
+            }
+            case ButtonPress: {
 
                 int xpos = event.xbutton.x;
                 int ypos = event.xbutton.y;
 
-                buffer[ypos * slimage->xSize + xpos] = color;
-                buffer[ypos * slimage->xSize + (xpos + 1)] = color;
-                buffer[ypos * slimage->xSize + (xpos - 1)] = color;
-                buffer[(ypos + 1) * slimage->xSize + xpos] = color;
-                buffer[(ypos - 1) * slimage->xSize + xpos] = color;
+                for (int x = xpos - circleRadius; x <= xpos + circleRadius; x++) {
+                    for (int y = ypos - circleRadius; y <= ypos + circleRadius; y++) {
+
+                        if (sqrt(pow((xpos - x), 2) + pow((ypos - y), 2)) <= circleRadius ) {
+                            buffer[y * slimage->xSize + x] = color;
+                        }
+                    }
+                }
 
                 XPutImage(display, window, gc, ximage, 0, 0, 0, 0, slimage->xSize, slimage->ySize);
                 XFlush(display);
 
                 break;
-        }
-        default: {
-                printf("The hell just happened");
-        };
+            }
+            default: {
+                    printf("The hell just happened");
+            };
         }
     }
 
