@@ -14,7 +14,7 @@
  * @param ySize Image height
  * @return 0 if successful, 1 otherwise
  */
-int createDefaultEditorWindow(int xSize, int ySize);
+int createDefaultEditorWindow(uint32_t xSize, uint32_t ySize);
 
 /**
  * Creates an editor window with a given image

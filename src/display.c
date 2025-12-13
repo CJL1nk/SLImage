@@ -6,8 +6,7 @@
 
 Display* createDisplay() {
 
-    Display* display;
-    display = XOpenDisplay(NULL);
+    Display* display = XOpenDisplay(NULL);
 
     if (!display) {
         printf("Failed to open display.\n");
@@ -18,7 +17,7 @@ Display* createDisplay() {
 }
 
 
-Window createWindow(Display* display, int xSize, int ySize) {
+Window createWindow(Display* display, const uint32_t xSize, const uint32_t ySize) {
 
     int screen_num = DefaultScreen(display);
     Window root_window = RootWindow(display, screen_num);
@@ -85,10 +84,6 @@ int viewImage(const SLImage* slimage) {
             }
             case KeyPress: {
                 exit = 1;
-                break;
-            }
-            case ButtonPress: {
-                printf("MousePress\n");
                 break;
             }
             default: {

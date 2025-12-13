@@ -5,7 +5,8 @@
 #include "editor.h"
 #include "write.h"
 
-int createDefaultEditorWindow(int xSize, int ySize) {
+int createDefaultEditorWindow(const uint32_t xSize, const uint32_t ySize) {
+
     SLImage* slimage = createEmptyImage(xSize, ySize);
 
     const int returnVal = createEditorWindow(slimage);
@@ -41,13 +42,16 @@ int createEditorWindow(const SLImage* slimage) {
 
         XNextEvent(display, &event);
 
+        // Death by switch case
         switch (event.type) {
+
             case Expose: {
                 // Display image on window
                 XPutImage(display, window, gc, ximage, 0, 0, 0, 0, slimage->xSize, slimage->ySize);
                 XFlush(display);
                 break;
             }
+
             case KeyPress: {
                 switch (event.xkey.keycode) {
 
@@ -121,6 +125,7 @@ int createEditorWindow(const SLImage* slimage) {
                 printf("%d\n", event.xkey.keycode);
                 break;
             }
+
             case ButtonPress: {
 
                 int xpos = event.xbutton.x;
@@ -141,6 +146,7 @@ int createEditorWindow(const SLImage* slimage) {
 
                 break;
             }
+
             default: {
                     printf("The hell just happened");
             };

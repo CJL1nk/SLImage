@@ -20,7 +20,7 @@ Display* createDisplay();
  * @param ySize Window height
  * @return Pointer to created window object
  */
-Window createWindow(Display* display, int xSize, int ySize);
+Window createWindow(Display* display, uint32_t xSize, uint32_t ySize);
 
 /**
  * Creates a simple window to view an image.
