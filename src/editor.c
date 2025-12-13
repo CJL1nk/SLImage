@@ -20,7 +20,7 @@ int createEditorWindow(const SLImage* slimage) {
     XEvent event;
     char exit = 0;
 
-    uint32_t color = 0xFFFF0000;
+    uint32_t color = 0xFF000000;
     uint8_t circleRadius = 10;
 
     Display* display = createDisplay();
@@ -112,7 +112,6 @@ int createEditorWindow(const SLImage* slimage) {
                         exit = 1;
                         break;
                     }
-
 
                     default: {
                         break;
