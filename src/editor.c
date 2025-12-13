@@ -30,7 +30,7 @@ int createEditorWindow(const SLImage* slimage) {
     const int screen = DefaultScreen(display);
 
     // Buffer that holds slimage pixel data
-    uint32_t* buffer = (uint32_t*)malloc(slimage->xSize * slimage->ySize * sizeof(uint32_t));
+    uint32_t* buffer = slimage->data;
 
     if (!buffer) {
         printf("Failed to allocate buffer.\n");
@@ -52,8 +52,8 @@ int createEditorWindow(const SLImage* slimage) {
         }
     }
 
-    while (!exit)
-    {printf("%X", color);
+    while (!exit) {
+
         XNextEvent(display, &event);
 
         switch (event.type) {
@@ -93,13 +93,26 @@ int createEditorWindow(const SLImage* slimage) {
                           break;
                     }
 
+                    case 24: { // q
+                        write(slimage->fileName, slimage->xSize, slimage->ySize, slimage->data);
+                        printf("Saved image");
+                        exit = 1;
+                        break;
+                    }
+
+                    case 39: { // s
+                        write(slimage->fileName, slimage->xSize, slimage->ySize, slimage->data);
+                        printf("Saved image");
+                        break;
+                    }
+
                     default: {
                             exit = 1;
                             break;
                     }
                 }
 
-                printf("%X", color);
+                printf("%d\n", event.xkey.keycode);
                 break;
             }
             case ButtonPress: {
