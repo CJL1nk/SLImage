@@ -21,7 +21,7 @@ int createEditorWindow(const SLImage* slimage) {
     char exit = 0;
 
     uint32_t color = 0xFFFF0000;
-    int circleRadius = 20;
+    uint8_t circleRadius = 10;
 
     Display* display = createDisplay();
     const Window window = createWindow(display, slimage->xSize, slimage->ySize);
@@ -52,48 +52,70 @@ int createEditorWindow(const SLImage* slimage) {
                 switch (event.xkey.keycode) {
 
                     case 79: { // Numpad 7
-                            color += 0x00050000;
-                            break;
+                        color += 0x00050000;
+                        printf("Color: %X\n", color);
+                        break;
                     }
                     case 83: { // Numpad 4
-                            color -= 0x00050000;
-                            break;
+                        color -= 0x00050000;
+                        printf("Color: %X\n", color);
+                        break;
                     }
 
                     case 80: { // Numpad 8
-                          color += 0x00000500;
-                          break;
+                        color += 0x00000500;
+                        printf("Color: %X\n", color);
+                        break;
                     }
                     case 84: { // Numpad 5
-                          color -= 0x00000500;
-                          break;
+                        color -= 0x00000500;
+                        printf("Color: %X\n", color);
+                        break;
                     }
 
                     case 81: { // Numpad 9
-                          color += 0x00000005;
-                          break;
+                        color += 0x00000005;
+                        printf("Color: %X\n", color);
+                        break;
                     }
                     case 85: { // Numpad 6
-                          color -= 0x00000005;
-                          break;
+                        color -= 0x00000005;
+                        printf("Color: %X\n", color);
+                        break;
+                    }
+
+                    case 20: { // -
+                        circleRadius -= 1;
+                        printf("Brush Radius: %d\n", circleRadius);
+                        break;
+                    }
+                    case 21: { // +
+                        circleRadius += 1;
+                        printf("Brush Radius: %d\n", circleRadius);
+                        break;
                     }
 
                     case 24: { // q
-                        write(slimage->fileName, slimage->xSize, slimage->ySize, slimage->data);
-                        printf("Saved image");
+                        writeImage(slimage);
+                        printf("Saved image\n");
                         exit = 1;
                         break;
                     }
 
                     case 39: { // s
-                        write(slimage->fileName, slimage->xSize, slimage->ySize, slimage->data);
-                        printf("Saved image");
+                        writeImage(slimage);
+                        printf("Saved image\n");
                         break;
                     }
 
+                    case 9: { // ESC
+                        exit = 1;
+                        break;
+                    }
+
+
                     default: {
-                            exit = 1;
-                            break;
+                        break;
                     }
                 }
 
@@ -105,6 +127,7 @@ int createEditorWindow(const SLImage* slimage) {
                 int xpos = event.xbutton.x;
                 int ypos = event.xbutton.y;
 
+                // Generate circle in image data from given radius
                 for (int x = xpos - circleRadius; x <= xpos + circleRadius; x++) {
                     for (int y = ypos - circleRadius; y <= ypos + circleRadius; y++) {
 

@@ -51,6 +51,7 @@ int main(const int argc, char* argv[]) {
     case 'e': {
 
             createDefaultEditorWindow(512, 512);
+            break;
     }
 
         default: {

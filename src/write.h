@@ -9,6 +9,15 @@
 
 /**
  * Writes image data to file
+ * Does NOT free image->data
+ * @param image Image to write
+ * @return 0 if successful, 1 otherwise
+ */
+int writeImage(const SLImage* image);
+
+/**
+ * Writes image data to file
+ * Does NOT free image->data
  * @param fileName Name of file to write
  * @param xSize Image width
  * @param ySize Image height
@@ -25,8 +34,20 @@ int write(const char* fileName, uint32_t xSize, uint32_t ySize, const uint32_t* 
  */
 uint32_t* generateTestData(uint32_t xSize, uint32_t ySize);
 
-uint32_t* whiteImage(uint32_t xSize, uint32_t ySize);
+/**
+ * Generates white image data
+ * @param xSize Image width
+ * @param ySize Image height
+ * @return
+ */
+uint32_t * whiteImage(uint32_t xSize, uint32_t ySize);
 
-SLImage* createEmptyImage(uint32_t xSize, uint32_t ySize);
+/**
+ * Creates an empty image with the name 'unnamed.slmg'
+ * @param xSize Image width
+ * @param ySize Image height
+ * @return
+ */
+SLImage * createEmptyImage(uint32_t xSize, uint32_t ySize);
 
 #endif //WRITE_H

@@ -4,6 +4,10 @@
 
 #include "write.h"
 
+int writeImage(const SLImage * image) {
+    return write(image->fileName, image->xSize, image->ySize, image->data);
+}
+
 int write(const char* fileName, const uint32_t xSize, const uint32_t ySize, const uint32_t* data) {
 
     // Bytes for file header
@@ -59,7 +63,7 @@ uint32_t* whiteImage(const uint32_t xSize, const uint32_t ySize) {
     return data;
 }
 
-SLImage* createEmptyImage(uint32_t xSize, uint32_t ySize) {
+SLImage* createEmptyImage(const uint32_t xSize, const uint32_t ySize) {
 
     SLImage* image = malloc(sizeof(SLImage));
 
