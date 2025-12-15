@@ -35,7 +35,7 @@ Bool XNextEventTimed(Display* dsp, XEvent* event_return, struct timeval* tv) {
 
 int createDefaultEditorWindow(const uint32_t xSize, const uint32_t ySize) {
 
-    SLImage* slimage = createEmptyImage(xSize, ySize);
+    SLImage* slimage = createEmptyImage("unnamed.slmg", xSize, ySize);
 
     const int returnVal = createEditorWindow(slimage);
 
@@ -226,16 +226,13 @@ int createEditorWindow(const SLImage* slimage) {
 
             XQueryPointer(display, window, &rootWindow, &childWindow, &root_x, &root_y, &win_x, &win_y, &mask);
 
-            int xpos = win_x;
-            int ypos = win_y;
-
             // Generate circle in image data from given radius
-            for (int x = xpos - circleRadius; x <= xpos + circleRadius; x++) {
-                for (int y = ypos - circleRadius; y <= ypos + circleRadius; y++) {
+            for (int x = win_x - circleRadius; x <= win_x + circleRadius; x++) {
+                for (int y = win_y - circleRadius; y <= win_y + circleRadius; y++) {
 
                     // Check euclidian distance and within image limits
                     if (y < slimage->ySize && x < slimage->xSize) {
-                        if (sqrt(pow((xpos - x), 2) + pow((ypos - y), 2)) <= circleRadius &&
+                        if (sqrt(pow((win_x - x), 2) + pow((win_y - y), 2)) <= circleRadius &&
                             y < slimage->ySize &&
                             x < slimage->xSize) {
                             slimage->data[y * slimage->xSize + x] = color;

@@ -37,5 +37,6 @@ Finally, the image can contain a description. The length of the description is d
 
 - Implement GUI
 - Implement scalable window
-- Optimize editor code
+- Implement image descriptions
+- Optimize and clean up editor code
 - 

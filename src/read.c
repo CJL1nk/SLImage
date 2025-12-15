@@ -15,6 +15,11 @@ SLImage* readImage(const char* fileName) {
 
     FILE* f = fopen(fileName, "rb");
 
+    // Return early if file doesn't exist
+    if (!f) {
+        return 0;
+    }
+
     // Read 4 bytes from offset 0, ensure the header is FF A5 FF E8
     fread(dataBuffer, 1, 4, f);
     for (int i = 0; i < 4; i++) {

@@ -63,11 +63,11 @@ uint32_t* whiteImage(const uint32_t xSize, const uint32_t ySize) {
     return data;
 }
 
-SLImage* createEmptyImage(const uint32_t xSize, const uint32_t ySize) {
+SLImage* createEmptyImage(char* fileName, const uint32_t xSize, const uint32_t ySize) {
 
     SLImage* image = malloc(sizeof(SLImage));
 
-    image->fileName = "unnamed.slmg";
+    image->fileName = fileName;
 
     image->xSize = xSize;
     image->ySize = ySize;

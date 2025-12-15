@@ -43,11 +43,12 @@ uint32_t* generateTestData(uint32_t xSize, uint32_t ySize);
 uint32_t * whiteImage(uint32_t xSize, uint32_t ySize);
 
 /**
- * Creates an empty image with the name 'unnamed.slmg'
+ * Creates an empty image
+ * @param fileName Name for file
  * @param xSize Image width
  * @param ySize Image height
  * @return
  */
-SLImage * createEmptyImage(uint32_t xSize, uint32_t ySize);
+SLImage* createEmptyImage(char* fileName, uint32_t xSize, uint32_t ySize);
 
 #endif //WRITE_H
