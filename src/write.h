@@ -24,7 +24,7 @@ int writeImage(const SLImage* image);
  * @param data Image datastream
  * @return 0 if successful, 1 otherwise
  */
-int write(const char* fileName, uint32_t xSize, uint32_t ySize, const uint32_t* data);
+int writeToFile(const char* fileName, uint32_t xSize, uint32_t ySize, const uint32_t* data);
 
 /**
  * Generates a gradient to fill an image with

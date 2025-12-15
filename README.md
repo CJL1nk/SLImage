@@ -1,6 +1,7 @@
 # SLImage
 An image viewer I made for my custom image format because I was bored
 
+This is still very in progress, check out the [Todo List](#Todo)
 # Usage
 
 There are 2 main modes to the program, read/view, and editor mode. To view a SLImage, simply do:
@@ -11,7 +12,7 @@ This will open a window containing the image itself.
 
 The 2nd mode, editor, will open/create an image to edit. If no image is provided, it will default to unnamed.slmg.
 <br>
-The editor itself is quite simple, however is currently only keybind driven (GUI will be implemented later). A color can be chosen by using the numpad keys, Numpad 7/4 to increase/decrease red value, Numpad 8/5 to increase/decrease green value, and Numpad 9/6 to increase/decrease blue value. After your color has been selected, you can draw that color using LMB. The image can be saved by clicking S or Q, where Q will save and exit. To exit without saving, press ESC. To open an image in editor mode, do:
+The editor itself is quite simple, however is currently only keybind driven (GUI will be implemented later). A color can be chosen by using the numpad keys, Numpad 7/4 to increase/decrease red value, Numpad 8/5 to increase/decrease green value, Numpad 9/6 to increase/decrease blue value, and Numpad 1/0 to increase/decrease alpha. After your color has been selected, you can draw that color using LMB. The image can be saved by clicking S or Q, where Q will save and exit. To exit without saving, press ESC. To open an image in editor mode, do:
 
 
 `./SLImage e </path/to/your/slimage>`
@@ -31,3 +32,10 @@ Following that, the next 8 bytes are used to determine the image dimensions, wit
 Following those 8 bytes, the actual image data stream starts. A pixel is represented as a set of 4 simple bytes, with one for each color value (ABGR). This makes the datastream length equal to ((width*height) * 4), which is the number of bytes the processor will read to display.
 
 Finally, the image can contain a description. The length of the description is defined in the first 4 bytes after the datastream, with the rest of the description residing immediately after.
+
+# Todo
+
+- Implement GUI
+- Implement scalable window
+- Optimize editor code
+- 

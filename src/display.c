@@ -17,7 +17,7 @@ Display* createDisplay() {
 }
 
 
-Window createWindow(Display* display, const uint32_t xSize, const uint32_t ySize) {
+Window createWindow(Display* display, const uint32_t xSize, const uint32_t ySize, const char* name) {
 
     int screen_num = DefaultScreen(display);
     Window root_window = RootWindow(display, screen_num);
@@ -35,14 +35,14 @@ Window createWindow(Display* display, const uint32_t xSize, const uint32_t ySize
     XSetStandardProperties(
         display,
         window,
-        "SLImage Viewer", // window name
+        name, // window name
         "Hello", // icon name
         None, // icon pixmap
         NULL, 0, // command arguments
         NULL // hints
     );
 
-    XSelectInput(display, window, ExposureMask | KeyPressMask | ButtonPressMask);
+    XSelectInput(display, window, ExposureMask | KeyPressMask | ButtonPressMask | ButtonReleaseMask);
 
     XMapWindow(display, window);
 
@@ -56,7 +56,7 @@ int viewImage(const SLImage* slimage) {
     char exit = 0;
 
     Display* display = createDisplay();
-    const Window window = createWindow(display, slimage->xSize, slimage->ySize);
+    const Window window = createWindow(display, slimage->xSize, slimage->ySize, "SLImage Viewer");
     const GC gc = XCreateGC(display, window, 0, 0);
 
     const int screen = DefaultScreen(display);
@@ -86,9 +86,6 @@ int viewImage(const SLImage* slimage) {
                 exit = 1;
                 break;
             }
-            default: {
-                printf("The hell just happened");
-            };
         }
     }
 

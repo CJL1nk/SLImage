@@ -5,10 +5,10 @@
 #include "write.h"
 
 int writeImage(const SLImage * image) {
-    return write(image->fileName, image->xSize, image->ySize, image->data);
+    return writeToFile(image->fileName, image->xSize, image->ySize, image->data);
 }
 
-int write(const char* fileName, const uint32_t xSize, const uint32_t ySize, const uint32_t* data) {
+int writeToFile(const char* fileName, const uint32_t xSize, const uint32_t ySize, const uint32_t* data) {
 
     // Bytes for file header
     const unsigned char headerBytes[4] = {0xFF, 0xA5, 0xFF, 0xE8};

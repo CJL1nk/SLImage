@@ -24,13 +24,13 @@ int main(const int argc, char* argv[]) {
     }
 
     switch (mode) {
-        case 'w': {
+        case 'w': { // Generates a test image
 
             const int xSize = atoi(argv[3]);
             const int ySize = atoi(argv[4]);
 
             const uint32_t* testData = generateTestData(xSize, ySize);
-            write(fileName, xSize, ySize, testData);
+            writeToFile(fileName, xSize, ySize, testData);
 
             free(testData);
 
@@ -48,13 +48,13 @@ int main(const int argc, char* argv[]) {
             break;
         }
 
-    case 'e': {
+        case 'e': {
             createDefaultEditorWindow(512, 512);
             break;
-    }
+        }
 
         default: {
-            printf("Valid modes: w (Write), r (Read)\n");
+            printf("Valid modes: r (Read), e (Editor), w (Test Write)\n");
         }
     }
 

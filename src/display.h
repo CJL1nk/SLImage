@@ -18,9 +18,10 @@ Display* createDisplay();
  * @param display Display to create window for
  * @param xSize Window width
  * @param ySize Window height
+ * @param name Name for window
  * @return Pointer to created window object
  */
-Window createWindow(Display* display, uint32_t xSize, uint32_t ySize);
+Window createWindow(Display* display, uint32_t xSize, uint32_t ySize, const char* name);
 
 /**
  * Creates a simple window to view an image.
