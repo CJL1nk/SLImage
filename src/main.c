@@ -38,11 +38,17 @@ int main(const int argc, char* argv[]) {
         }
 
         case 'r': {
+
             if (!fileName) {
                 printf("Please specify a filename!\n");
                 return 1;
             }
             const SLImage* image = readImage(fileName);
+
+            if (!image) {
+                printf("Failed to read image!\n");
+                return 1;
+            }
 
             printf("xSize: %d\n", image->xSize);
             printf("ySize: %d\n", image->ySize);

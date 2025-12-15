@@ -4,6 +4,8 @@
 
 #include "read.h"
 
+#include <string.h>
+
 SLImage* readImage(const char* fileName) {
 
     // Bytes for file header
@@ -19,6 +21,9 @@ SLImage* readImage(const char* fileName) {
     if (!f) {
         return 0;
     }
+
+    // Load image name
+    image->fileName = strdup(fileName);
 
     // Read 4 bytes from offset 0, ensure the header is FF A5 FF E8
     fread(dataBuffer, 1, 4, f);

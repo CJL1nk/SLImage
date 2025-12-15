@@ -21,7 +21,7 @@ int writeImage(const SLImage* image);
  * @param fileName Name of file to write
  * @param xSize Image width
  * @param ySize Image height
- * @param data Image datastream
+ * @param data Image datastream, NOT freed after use
  * @return 0 if successful, 1 otherwise
  */
 int writeToFile(const char* fileName, uint32_t xSize, uint32_t ySize, const uint32_t* data);

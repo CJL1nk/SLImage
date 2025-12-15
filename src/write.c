@@ -4,7 +4,7 @@
 
 #include "write.h"
 
-int writeImage(const SLImage * image) {
+int writeImage(const SLImage* image) {
     return writeToFile(image->fileName, image->xSize, image->ySize, image->data);
 }
 
