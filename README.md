@@ -10,12 +10,12 @@ There are 2 main modes to the program, read/view, and editor mode. To view a SLI
 
 This will open a window containing the image itself.
 
-The 2nd mode, editor, will open/create an image to edit. If no image is provided, it will default to unnamed.slmg.
+The 2nd mode, editor, will open/create an image to edit. If the image doesn't already exist, a width and height will need to be specified. If no image is provided, it will default to unnamed.slmg.
 <br>
 The editor itself is quite simple, however is currently only keybind driven (GUI will be implemented later). A color can be chosen by using the numpad keys, Numpad 7/4 to increase/decrease red value, Numpad 8/5 to increase/decrease green value, Numpad 9/6 to increase/decrease blue value, and Numpad 1/0 to increase/decrease alpha. After your color has been selected, you can draw that color using LMB. The image can be saved by clicking S or Q, where Q will save and exit. To exit without saving, press ESC. To open an image in editor mode, do:
 
 
-`./SLImage e </path/to/your/slimage>`
+`./SLImage e </path/to/your/slimage> <width> <height>`
 
 If the executable is run with no arguments, it will default to opening an editor for an image named unnamed.slmg.
 
