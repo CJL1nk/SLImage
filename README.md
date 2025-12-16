@@ -12,12 +12,28 @@ This will open a window containing the image itself.
 
 The 2nd mode, editor, will open/create an image to edit. If the image doesn't already exist, a width and height will need to be specified. If no image is provided, it will default to unnamed.slmg.
 <br>
-The editor itself is quite simple, however is currently only keybind driven (GUI will be implemented later). A color can be chosen by using the numpad keys, Numpad 7/4 to increase/decrease red value, Numpad 8/5 to increase/decrease green value, Numpad 9/6 to increase/decrease blue value, and Numpad 1/0 to increase/decrease alpha. After your color has been selected, you can draw that color using LMB. The image can be saved by clicking S or Q, where Q will save and exit. To exit without saving, press ESC. To open an image in editor mode, do:
+The editor itself is quite simple, however is currently only [keybind](#Keybinds) driven (GUI will be implemented later). A color can be chosen using the numpad keys, where the current color selected will be outputted to terminal. Similarly, a brush size can also be selected. After your color and brush has been selected, you can draw that color wherever you'd like on the window. The image can then be safely saved an exited. To open an image in editor mode, do:
 
 
 `./SLImage e </path/to/your/slimage> <width> <height>`
 
 If the executable is run with no arguments, it will default to opening an editor for an image named unnamed.slmg.
+## Keybinds
+
+- LMB: Draw
+- \+ : Increase brush size
+- \- : Decrease brush size
+- Numpad7: Increase red value
+- Numpad4: Decrease red value
+- Numpad8: Increase green value
+- Numpad5: Decrease green value
+- Numpad9: Increase blue value
+- Numpad6: Decrease blue value
+- Numpad1: Increase alpha (currently unused)
+- Numpad0: Decrease alpha (currently unused)
+- S: Save image
+- Q:  Save and quit
+- ESC: Exit without saving
 
 # The Format Itself
 
