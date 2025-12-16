@@ -40,5 +40,6 @@ Finally, the image can contain a description. The length of the description is d
 - Implement scalable window/zoom
 - Implement color opacity
 - Implement image descriptions
+- PNG to SLImage tool
 - Bucket fill tool (?)
 - Optimize and clean up editor code
