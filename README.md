@@ -35,8 +35,10 @@ Finally, the image can contain a description. The length of the description is d
 
 # Todo
 
-- Implement GUI
-- Implement scalable window
+- Implement GUI (Color picker, brushes, etc...)
+- Implement more brushes
+- Implement scalable window/zoom
 - Implement color opacity
 - Implement image descriptions
+- Bucket fill tool (?)
 - Optimize and clean up editor code
